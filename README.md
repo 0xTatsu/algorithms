@@ -1,1 +1,3 @@
-# algorithms
+# Algorithm
+
+- Bubble sort
