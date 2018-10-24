@@ -17,4 +17,4 @@ function memoize(fn) {
   }
 }
 
-// https://medium.freecodecamp.org/understanding-memoize-in-javascript-51d07d19430e
+// Ref: https://medium.freecodecamp.org/understanding-memoize-in-javascript-51d07d19430e
