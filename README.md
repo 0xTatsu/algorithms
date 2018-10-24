@@ -1,3 +1,3 @@
 # Algorithm
 
-- Bubble sort
+The beauty of math
