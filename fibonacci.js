@@ -1,23 +1,18 @@
 // 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
+let fib = memoize(n => {
+	switch(n) {
+  	case 0: return 0;
+    case 1: return 1;
+    default: return fib(n-1) + fib(n-2);
+  }
+})
 
-const cache = {};
-
-function fibonacci(number) {
-    
-    if (number < 1)
-        return 0;
-
-    if (number <= 2)
-        return 1;
-    
-    if (number in cache)
-        return cache[number];
-    
-    const value = fibonacci(number- 1) + fibonacci(number - 2);
-        
-    cache[number] = value;
-
-    return value;
-}
-
-// Ref: https://bit.ly/2kFdtvR
+function memoize(fn) {
+	let cache = new Map;
+  return _ => {
+  	if (!cache.has(_)) {
+    	cache.set(_, fn(_));
+    }
+    return cache.get(_);
+  }
+};
