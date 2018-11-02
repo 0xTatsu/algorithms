@@ -1,10 +1,14 @@
-// Here, we’re checking that every item (x) is greater than or equal to the item before it (arr[i - 1]) 
-// or has no item before it (i === 0).
+function isConsecutive(arr) {
+  if (arr.length <= 2) return true;
+  let asc = undefined;
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i+1] === arr[i]) {}
+    else if (asc === undefined) { asc = arr[i+1] > arr[i]; }
+    else if (asc !== (arr[i+1] > arr[i])) return false;
+  }
+  return true;
+  // if (asc === undefined) return 'all items are the same'
+  // return asc ? 'asc' : 'desc';
 
-function isAscending(arr) {
-    return arr.every(function (x, i) {
-        return i === 0 || x >= arr[i - 1];
-    });
 }
-
-// Flip >= to <= for isDescending.
+export default isConsecutive;
