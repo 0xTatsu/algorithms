@@ -12,3 +12,19 @@ function isConsecutive(arr) {
 
 }
 export default isConsecutive;
+
+test('[1,2,3,3,4,5]', () => {
+  expect(isConsecutive([1,2,3,3,4,5])).toBeTruthy();
+});
+test('[5,2,1,1,0]', () => {
+  expect(isConsecutive([5,2,1,1,0])).toBeTruthy();
+});
+test('[5,6,3,2,1]', () => {
+  expect(isConsecutive([5,6,3,2,1])).toBeFalsy();
+});
+test('[1,2,3,3,1]', () => {
+  expect(isConsecutive([1,2,3,3,1])).toBeFalsy();
+});
+test('[1,1,1,1,1]', () => {
+  expect(isConsecutive([1,1,1,1,1])).toBeTruthy();
+});
