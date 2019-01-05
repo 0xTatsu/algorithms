@@ -1,3 +1,6 @@
+# find the first position which consists numbers ranging from 0 to X
+
+
 def solution(X, A):
     covered_time = [-1]*X  # Record the time, each position is covered
     uncovered = X          # Record the number of uncovered position
@@ -16,5 +19,4 @@ def solution(X, A):
     return -1
 
 
-# print(solution(5, [1, 3, 1, 3, 2, 3, 5, 4]))
-print([1]*5)
+print(solution(5, [1, 3, 1, 3, 2, 3, 5, 4]))
