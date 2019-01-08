@@ -5,19 +5,12 @@ sort first, and if the leader occurs in our sequence, it must occur at index = n
 
 
 def solution(A):
-    n = len(A)
-    leader = -1
-    A.sort()
-    candidate = A[n // 2]
-    count = 0
-    if candidate in A:
-        count = A.count(candidate)
-    if (count > n // 2):
-        leader = candidate
-    return leader
+    mid = len(A) // 2
+    sortedA = sorted(A)
+    if A and A.count(sortedA[mid]) > mid:
+        return A.index(sortedA[mid])
+    return -1
 
-
-# print(solution([3, 4, 3, 2, 3, -1, 3, 3]))  # 0, 2, 4, 6 or 7
 
 """
 complexity: O(n)
@@ -46,7 +39,9 @@ def goodSolution(A):
     return -1
 
 
+A0 = []
 A1 = [3, 4, 3, 2, 3, -1, 3, 3]
 A2 = [1, 2, 3, 4, 5]  # size >= 1, check > n//2
 A2 = [1, 2, 3, 4]  # size = 0, return -1
-print(goodSolution(A1))  # 0, 2, 4, 6 or 7
+A3 = [2, 1, 1, 1, 3]
+# print(goodSolution(A1))
