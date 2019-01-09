@@ -17,6 +17,7 @@ complexity: O(n)
 removing a pair of elements of different values, 
 the remaining sequence still has the same leader.
 """
+# result = [i for i, x in enumerate(A) if x == candidate]
 
 
 def goodSolution(A):
@@ -32,10 +33,8 @@ def goodSolution(A):
                 size += 1
             else:
                 size -= 1
-
-    result = [i for i, x in enumerate(A) if x == candidate]
-    if len(result) > n // 2:
-        return result
+    if A and A.count(candidate) > n // 2:
+        return A.index(candidate)
     return -1
 
 
@@ -44,4 +43,4 @@ A1 = [3, 4, 3, 2, 3, -1, 3, 3]
 A2 = [1, 2, 3, 4, 5]  # size >= 1, check > n//2
 A2 = [1, 2, 3, 4]  # size = 0, return -1
 A3 = [2, 1, 1, 1, 3]
-# print(goodSolution(A1))
+print(goodSolution(A3))
