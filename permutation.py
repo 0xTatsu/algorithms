@@ -1,34 +1,35 @@
-def permutation(input):
-    if len(input) == 1:
-        return input if isinstance(input, list) else [input]
+def permutation(iStr):
+    if len(iStr) == 1:
+        return [iStr]
 
-    result = []
-    for i in range(len(input)):
-        first = input[i]
-        rest = input[:i] + input[i + 1:]
-        rest_permutation = permutation(rest)
-        for p in rest_permutation:
-            result.append(first + p)
-    return result
-
-
-sentence = 'hello, My name anh, ymh! anme, where are you? '
-word = 'anme'
+    res = []
+    for i in range(len(iStr)):
+        first = iStr[i]
+        left = iStr[:i] + iStr[i + 1:]
+        innerPermutation = permutation(left)
+        for j in range(len(innerPermutation)):
+            res.append(first + innerPermutation[j])
+    return res
 
 
-def firstWR(s, wd):
-    perm = permutation(wd)
-    arr = s.split(' ')
-    for i in range(len(perm)):
-        if perm[i] in arr:
-            return perm[i]
+me = 'hello, My name anh, ymh! mean anme, where are you? '
+s = 'naem'
 
 
-def indexWR(str, wd):
-    fw = firstWR(str, wd)
-    if fw is not None:
-        return str.find(fw)
+def firstWR(iStr, wr):
+    wrPerm = permutation(wr)
+    arr = iStr.split(' ')
+    for w in range(len(arr)):
+        if arr[w] in wrPerm:
+            return arr[w]
+    return None
 
 
-print(firstWR(sentence, word))
-print(indexWR(sentence, word))
+def indexWR(iStr, wr):
+    w = firstWR(iStr, wr)
+    return iStr.split(' ').index(w)
+
+
+print(permutation('name'))
+# print(firstWR(me, s))
+# print(indexWR(me, s))
