@@ -1,7 +1,7 @@
 from collections import Counter
-import sys 
+import sys
 
-INT_MIN = -sys.maxsize -1
+INT_MIN = -sys.maxsize - 1
 
 # There are 2 types of sliding window (Fixed & Dynamic)
 
@@ -15,67 +15,67 @@ INT_MIN = -sys.maxsize -1
 #  * k = 4
 #  */
 
-def MaxSumSubArray(arr, k): 
+
+""" def MaxSumSubArray(arr, k):
     currentRunningSum = 0
     maxSum = INT_MIN
 
     for index in range(len(arr)):
-      currentRunningSum += arr[index]
-      if index >= k-1:
-        maxSum = max(maxSum, currentRunningSum)
-        currentRunningSum -= arr[index - (k-1)]
+        currentRunningSum += arr[index]
+        if index >= k-1:
+            maxSum = max(maxSum, currentRunningSum)
+            currentRunningSum -= arr[index - (k-1)]
 
-    return maxSum
+    return maxSum """
 
-# print(MaxSumSubArray([1, 4, 2, 10, 2, 3, 1, 0, 20], 4)) 
+# print(MaxSumSubArray([1, 4, 2, 10, 2, 3, 1, 0, 20], 4))
 
 # longest-substring-without-repeating-characters
-def lengthOfLongestSubstring(s):
+# Given a string, find the length of the longest substring without repeating characters.
+
+
+""" def lengthOfLongestSubstring2(s):
     hashTable = {}
     longest_length = 0
     left_window = 0
 
     for right_window, item in enumerate(s):
         if item in hashTable:
-            if hashTable[item] > left_window: #abbbbba
+            if hashTable[item] > left_window:  # abbbbba
                 left_window = hashTable[item] + 1
 
         window_length = right_window - left_window + 1
         longest_length = max(longest_length, window_length)
         hashTable[item] = right_window
 
-    return longest_length
-
-# print(lengthOfLongestSubstring("abcbdbdbbdcdabd") == 4)
+    return longest_length """
 
 
-def LongestSubstringKDistinct1(arr, k):
-    numberOfUnique = 0
-    str_list = []
-    res = []
+""" def lengthOfLongestSubstring(s):
+    count = Counter()
+    max_size = 0
+    left_window = 0
 
-    for item in arr:
-        if item in str_list:
-            str_list.append(item)
-        else:
-            str_list.append(item)
-            numberOfUnique += 1
-            while numberOfUnique > k:
-                temp = str_list[0]
-                str_list = str_list[1:]
-                if temp not in str_list:
-                    numberOfUnique -= 1
-        if len(str_list) > len(res):
-            res = str_list[:]
+    for right_window, current_char in enumerate(s):
+        count[current_char] += 1
+        while count[current_char] > 1:
+            count[s[left_window]] -= 1
+            left_window += 1
+        max_size = max(max_size, right_window - left_window + 1)
 
-    return "".join(res)
+    return max_size """
 
-def LongestSubstringKDistinct(arr, k):
+
+# print(lengthOfLongestSubstring("abcbdbdbbdcdabd") == len("abcb"))
+# print(lengthOfLongestSubstring("abcabcbb") == len("abc"))
+
+
+""" def LongestSubstringKDistinct(arr, k):
     count = Counter()
     left_window = 0
     max_size = 0
 
-    for right_window, item  in enumerate(arr):
+    for right_window, item in enumerate(arr):
         count[item] += 1
         while len(count) > k:
             count[arr[left_window]] -= 1
@@ -84,17 +84,42 @@ def LongestSubstringKDistinct(arr, k):
             left_window += 1
         max_size = max(max_size, right_window-left_window+1)
 
+    return max_size """
 
-    return max_size
-            
-print(LongestSubstringKDistinct("abcbdbdbbdcdabd", 2) == 7) # bdbdbbd
-# print(LongestSubstringKDistinct("abcbdbdbbdcdabd", 3) == "bcbdbdbbdcd") # bcbdbdbbdcd
-# print(LongestSubstringKDistinct("abcbdbdbbdcdabd", 5) == "abcbdbdbbdcdabd") # abcbdbdbbdcdabd
 
+# print(LongestSubstringKDistinct("abcbdbdbbdcdabd", 2) == 7)  # bdbdbbd
+# print(LongestSubstringKDistinct("abcbdbdbbdcdabd", 3) == 11)  # bcbdbdbbdcd
+# print(LongestSubstringKDistinct("abcbdbdbbdcdabd", 5)
+#       == len("abcbdbdbbdcdabd"))  # abcbdbdbbdcdabd
+
+
+# 424. Longest Repeating Character Replacement
+# https://leetcode.com/problems/longest-repeating-character-replacement/
+# https://www.youtube.com/watch?v=ypEEgP7Hg_I
+# https://leetcode.com/problems/longest-repeating-character-replacement/discuss/91272/Consise-Python-sliding-window
+
+""" def characterReplacement(s, k):
+    left = 0
+    counts = Counter()
+    for right, char in enumerate(s):
+        counts[char] += 1
+        # there are just 2 chars ABAA -> dominant char (A)
+        max_char_n = counts.most_common(1)[0][1] # there is only one dominance at a time
+        window_size = right - left + 1
+        # window_size - max_char_n = the number of less occurences of char ABAA => B => 1
+        # we don't have to use while here because we increase only, so while run just one
+        if window_size - max_char_n > k:
+            counts[s[left]] -= 1
+            left += 1
+    return right - left + 1 """
+
+
+# print(characterReplacement("ABAB", 2) == 4)
+# print(characterReplacement("AABABBA", 1) == 4)
 
 # https://leetcode.com/problems/fruit-into-baskets/solution/
 # https://www.youtube.com/watch?v=lkqpHmgnXSI
-def totalFruit(tree):
+""" def totalFruit(tree):
     ans = i = 0
     count = Counter()
     for j, x in enumerate(tree):
@@ -105,7 +130,7 @@ def totalFruit(tree):
                 del count[tree[i]]
             i += 1
         ans = max(ans, j - i + 1)
-    return ans
+    return ans """
 
 # print(totalFruit([1,2,1]) == 3)
 # print(totalFruit([0,1,2,2]) == 3)
